@@ -1,49 +1,49 @@
 const express  = require('express');
 const router   = express.Router();
 const mongoose = require('mongoose'); // using to generate ObjectIDs
-const Show   = require('../models/Show').Show;
+const Show  = require('../models/Show').Cake;
 
 /**
  * Functionality for this route:
- *  C   POST    /Shows/        Create a new Show
- *  R   GET     /Shows         Gets an array of all Shows
- *  R   GET     /Shows/:id     Get a single Show, by ID
- *  U   PUT     /Shows/:id     Update a single Show, by id
- *  D   DELETE  /Shows/:id     Delete a single Show, by ID
+ *  C   POST    /Cakes/        Create a new Cake
+ *  R   GET     /Cakes         Gets an array of all Cakes
+ *  R   GET     /Cakes/:id     Get a single Cake, by ID
+ *  U   PUT     /Cakes/:id     Update a single Cake, by id
+ *  D   DELETE  /Cakes/:id     Delete a single Cake, by ID
  */
 
-// GET an array of all Shows
+// GET an array of all Cakes
 router.get('/', (req, res) => {
     return mongoose
       .model('Show')
       .find({})
-      .then (Shows => res.json(Shows))
+      .then (shows => res.json(shows))
       .catch(err => res
         .status(500)
         .json({ok: false})
       );
   });
 
-  // GET a single Show by ID
+  // GET a single cake by ID
 router.get('/:id([0-9a-fA-F]{24})', (req, res) => {
   return mongoose
     .model('Show')
     .findOne({_id: req.params.id})
-    .then (Show => res.json(Show))
+    .then (show => res.json(show))
     .catch(err => res
       .status(500)
       .json({ok: false})
     );
 });
 
-// POST Create a new Show
+// POST Create a new show
 router.post('/', (req, res) => {
   return new Show({
     title     : req.body.title,
   })
   .save()
-  .then (Show => Show.populate(Show, {path: '_id'}))
-  .then (Show => res.json(Show))
+  .then (show => Show.populate(show, {path: '_id'}))
+  .then (show => res.json(show))
   .catch(err => res
     .status(400)
     .json({ok: false, error: err.message})
@@ -61,7 +61,7 @@ router.delete('/:id([0-9a-fA-F]{24})', (req, res) => {
     );
 });
 
-// PUT Update a Show
+// PUT Update a cake
 router.put('/:id([0-9a-fA-F]{24})', (req, res) => {
   return Show
     .findOneAndUpdate(
@@ -71,8 +71,8 @@ router.put('/:id([0-9a-fA-F]{24})', (req, res) => {
       }},
       {new: true}
     )
-    .then (Show => Show.populate(Show, {path: '_id'}))
-    .then (Show => res.json(Show))
+    .then (show => Show.populate(show, {path: '_id'}))
+    .then (show => res.json(show))
     .catch(err => res
       .status(500)
       .json({ok: false})
