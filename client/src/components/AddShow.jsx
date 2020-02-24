@@ -3,7 +3,7 @@ import {navigate, Link}   from '@reach/router';
 import urlToCurrentDomain from '../lib/urlToCurrentDomain';
 import * as Config        from '../config.json'
 
-class AddCake extends React.Component {
+class AddShow extends React.Component {
 
   // #######################################################
   // # Local state
@@ -23,39 +23,51 @@ class AddCake extends React.Component {
       return (
         <div>
           <h1>Error</h1>
-          <p>Sorry, there was an error creating the cake. The error was: {this.state.reportedError || 'Unknown'}</p>
+          <p>Sorry, there was an error creating the show. The error was: {this.state.reportedError || 'Unknown'}</p>
           <a href='#' onClick={this.resetForRetry.bind(this)}>Try again</a>&nbsp;|&nbsp;
-          <Link to='/'>Back to All cakes</Link>
+          <Link to='/'>Back to All shows</Link>
         </div>
       );
     } else if (this.state.processingAdd) {
       return (
-        <div>Adding cake...</div>
+        <div>Adding show...</div>
       );
     } else {
       return (
         <div>
-          <h1>Add a cake</h1>
+          <h1>Add a show</h1>
           <form onSubmit={this.handleSubmit.bind(this)}>
 
             <div>
-              <label>cake Title:
-                <input type='' value={this.state.title} onChange={this.handleTitleUpdate.bind(this)} />
+              <label>Enter Title:
+                <input type='' value={this.state.Title} onChange={this.handleTitleUpdate.bind(this)} />
+              </label>
+
+              <label>Enter Number of Seasons:
+                <input type='' value={this.state.Season} onChange={this.handleSeasonUpdate.bind(this)} />
+              </label>
+
+              <label>Enter Show air date:
+                <input type='' value={this.state.Air} onChange={this.handleAirUpdate.bind(this)} />
+              </label>
+  
+              <label>Enter air date of the final episode:
+                <input type='' value={this.state.Finalair} onChange={this.handleFinalAirUpdate.bind(this)} />
               </label>
             </div>
 
             {/* <div>
-              <label>cake Content:
+              <label>show Content:
                 <textarea value={this.state.content} onChange={this.handleContentUpdate.bind(this)}></textarea>
               </label>
             </div> */}
 
             <div>
-              <input type='submit' value='Add Cake' />
+              <input type='submit' value='Add Show' />
             </div>
 
           </form>
-          <Link to='/'>Back to All cakes</Link>
+          <Link to='/'>Back to All shows</Link>
         </div>
       );
     }
@@ -63,6 +75,18 @@ class AddCake extends React.Component {
 
   handleTitleUpdate(e) {
     this.setState({title: e.target.value || null});
+  }
+
+  handleSeasonUpdate(e) {
+    this.setState({season: e.target.value || null});
+  }
+
+  handleAirUpdate(e) {
+    this.setState({air: e.target.value || null});
+  }
+
+  handleFinalAirUpdate(e) {
+    this.setState({finalair: e.target.value || null});
   }
 
   handleContentUpdate(e) {
@@ -75,7 +99,7 @@ class AddCake extends React.Component {
     e.preventDefault();
 
     // Perform a POST call for the new data
-    fetch(urlToCurrentDomain(`${Config.cakesAPI}`), {
+    fetch(urlToCurrentDomain(`${Config.showsAPI}`), {
       method : 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -92,7 +116,7 @@ class AddCake extends React.Component {
         }
         return res.json();
       })
-      .then (json => navigate(`/cake/${json._id}`))
+      .then (json => navigate(`/show/${json._id}`))
       .catch(err => {
         this.setState({reportedError: err.message || 'Unknown'});
       })
@@ -104,9 +128,9 @@ class AddCake extends React.Component {
   }
 
   componentDidMount() {
-    // this.getComments(this.props.cakeID);
+    // this.getComments(this.props.showID);
   }
 
 }
 
-export default AddCake;
+export default AddShow;
