@@ -10,7 +10,11 @@ class AddShow extends React.Component {
   // #######################################################
 
   state = {
-    title     : ''
+    Title     : '',
+    Season    : '',
+    FirstEpisodeDate : '',
+    FinalEpisodeDate : '',
+    NoOfEpisodes : ''
   }
 
   // #######################################################
@@ -39,20 +43,24 @@ class AddShow extends React.Component {
           <form onSubmit={this.handleSubmit.bind(this)}>
 
             <div>
-              <label>Enter Title:
-                <input type='' value={this.state.Title} onChange={this.handleTitleUpdate.bind(this)} />
+              <label>Show Title:
+                <input type='text' value={this.state.Title} onChange={this.handleTitleUpdate.bind(this)} />
               </label>
 
-              <label>Enter Number of Seasons:
-                <input type='' value={this.state.Season} onChange={this.handleSeasonUpdate.bind(this)} />
+              <label>Number of Seasons:
+                <input type='text' value={this.state.Season} onChange={this.handleSeasonUpdate.bind(this)} />
               </label>
 
-              <label>Enter Show air date:
-                <input type='' value={this.state.Air} onChange={this.handleAirUpdate.bind(this)} />
+              <label>Show air date:
+                <input type='text' value={this.state.Air} onChange={this.handleAirUpdate.bind(this)} />
               </label>
   
-              <label>Enter air date of the final episode:
-                <input type='' value={this.state.Finalair} onChange={this.handleFinalAirUpdate.bind(this)} />
+              <label>Air date of the final episode:
+                <input type='text' value={this.state.Finalair} onChange={this.handleFinalAirUpdate.bind(this)} />
+              </label>
+
+              <label>No of Episodes:
+                <input type='text' value={this.state.NoOfEpisodes} onChange={this.handleNoOfEpisodesUpdate.bind(this)} />
               </label>
             </div>
 
@@ -74,23 +82,23 @@ class AddShow extends React.Component {
   }
 
   handleTitleUpdate(e) {
-    this.setState({title: e.target.value || null});
+    this.setState({Title: e.target.value || null});
   }
 
   handleSeasonUpdate(e) {
-    this.setState({season: e.target.value || null});
+    this.setState({Season: e.target.value || null});
   }
 
   handleAirUpdate(e) {
-    this.setState({air: e.target.value || null});
+    this.setState({Air: e.target.value || null});
   }
 
   handleFinalAirUpdate(e) {
-    this.setState({finalair: e.target.value || null});
+    this.setState({Finalair: e.target.value || null});
   }
 
-  handleContentUpdate(e) {
-    this.setState({content: e.target.value || null});
+  handleNoOfEpisodesUpdate(e) {
+    this.setState({NoOfEpisodes: e.target.value || null});
   }
 
   handleSubmit(e) {
