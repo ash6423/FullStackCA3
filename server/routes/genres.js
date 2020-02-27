@@ -1,7 +1,7 @@
 const express  = require('express');
 const router   = express.Router();
 const mongoose = require('mongoose'); // using to generate ObjectIDs
-const Show  = require('../models/Show').Cake;
+const Genre  = require('../models/Genre').Genre;
 
 /**
  * Functionality for this route:
@@ -15,9 +15,9 @@ const Show  = require('../models/Show').Cake;
 // GET an array of all Cakes
 router.get('/', (req, res) => {
     return mongoose
-      .model('Show')
+      .model('Genre')
       .find({})
-      .then (shows => res.json(shows))
+      .then (genres => res.json(genres))
       .catch(err => res
         .status(500)
         .json({ok: false})
@@ -27,9 +27,9 @@ router.get('/', (req, res) => {
   // GET a single cake by ID
 router.get('/:id([0-9a-fA-F]{24})', (req, res) => {
   return mongoose
-    .model('Show')
+    .model('Genre')
     .findOne({_id: req.params.id})
-    .then (show => res.json(show))
+    .then (genre => res.json(genre))
     .catch(err => res
       .status(500)
       .json({ok: false})
@@ -38,16 +38,12 @@ router.get('/:id([0-9a-fA-F]{24})', (req, res) => {
 
 // POST Create a new show
 router.post('/', (req, res) => {
-  return new Show({
-    Title     : this.state.Title,
-        Seasons : this.state.Seasons,
-        FirstEpisodeDate : this.state.FirstEpisodeDate,
-        FinalEpisodeDate : this.state.FinalEpisodeDate,
-        NoOfEpisodes : this.state.NoOfEpisodes
+  return new Genre({
+    Genre     : req.body.Genre,
   })
   .save()
-  .then (show => Show.populate(show, {path: '_id'}))
-  .then (show => res.json(show))
+  .then (genre => Genre.populate(genre, {path: '_id'}))
+  .then (genre => res.json(genre))
   .catch(err => res
     .status(400)
     .json({ok: false, error: err.message})
@@ -56,7 +52,7 @@ router.post('/', (req, res) => {
 
 // DELETE Delete a topic with a given ID
 router.delete('/:id([0-9a-fA-F]{24})', (req, res) => {
-  return Show
+  return Genre
     .deleteOne({_id: req.params.id})
     .then (() => res.json({'ok': true}))
     .catch(err => res
@@ -67,20 +63,16 @@ router.delete('/:id([0-9a-fA-F]{24})', (req, res) => {
 
 // PUT Update a cake
 router.put('/:id([0-9a-fA-F]{24})', (req, res) => {
-  return Show
+  return Genre
     .findOneAndUpdate(
       {_id: req.params.id},
       {$set: {
-        Title     : this.state.Title,
-        Seasons : this.state.Seasons,
-        FirstEpisodeDate : this.state.FirstEpisodeDate,
-        FinalEpisodeDate : this.state.FinalEpisodeDate,
-        NoOfEpisodes : this.state.NoOfEpisodes
+        Genre  : req.body.Genre,
       }},
       {new: true}
     )
-    .then (show => Show.populate(show, {path: '_id'}))
-    .then (show => res.json(show))
+    .then (genre => Genre.populate(genre, {path: '_id'}))
+    .then (genre => res.json(genre))
     .catch(err => res
       .status(500)
       .json({ok: false})

@@ -4,7 +4,31 @@ const validator = require('validator');
 const SchemeConfig = {timestamps: true, skipVersioning: true};
 const ShowSchema  = new mongoose.Schema({
 
-    title: {
+    Title: {
+      type      : String,
+      required  : true,
+      validator : value => !validator.isEmpty(value)
+    },
+    
+    Seasons: {
+      type      : String,
+      required  : true,
+      validator : value => !validator.isEmpty(value)
+    },
+    
+    FirstEpisodeDate: {
+      type      : String,
+      required  : true,
+      validator : value => !validator.isEmpty(value)
+    },
+    
+    FinalEpisodeDate: {
+      type      : String,
+      required  : true,
+      validator : value => !validator.isEmpty(value)
+    },
+    
+    NoOfEpisodes: {
       type      : String,
       required  : true,
       validator : value => !validator.isEmpty(value)

@@ -105,9 +105,12 @@ class AddShow extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        authoredBy: this.state.authoredBy,
-        title     : this.state.title,
-        content   : this.state.content
+       
+        Title     : this.state.Title,
+        Seasons : this.state.Seasons,
+        FirstEpisodeDate : this.state.FirstEpisodeDate,
+        FinalEpisodeDate : this.state.FinalEpisodeDate,
+        NoOfEpisodes : this.state.NoOfEpisodes
       })}
     )
       .then (res  => {

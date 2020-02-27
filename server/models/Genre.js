@@ -2,9 +2,9 @@ const mongoose  = require('mongoose');
 const validator = require('validator');
 
 const SchemeConfig = {timestamps: true, skipVersioning: true};
-const CakeSchema  = new mongoose.Schema({
+const GenreSchema  = new mongoose.Schema({
 
-    title: {
+    Genre: {
       type      : String,
       required  : true,
       validator : value => !validator.isEmpty(value)
