@@ -9,30 +9,27 @@ const ShowSchema  = new mongoose.Schema({
       required  : true,
       validator : value => !validator.isEmpty(value)
     },
-    
     Seasons: {
       type      : String,
       required  : true,
       validator : value => !validator.isEmpty(value)
     },
-    
     FirstEpisodeDate: {
       type      : String,
       required  : true,
       validator : value => !validator.isEmpty(value)
     },
-    
     FinalEpisodeDate: {
       type      : String,
       required  : true,
       validator : value => !validator.isEmpty(value)
     },
-    
     NoOfEpisodes: {
       type      : String,
       required  : true,
       validator : value => !validator.isEmpty(value)
     }
+
 
   }, SchemeConfig);
 

@@ -39,6 +39,7 @@ class Shows extends React.Component {
             ))}
           </ul>
           <p><Link to='/add-show'>Add a new Show</Link></p>
+          <p><Link to='/genres'>View all Genres</Link></p>
         </div>
       )
     }

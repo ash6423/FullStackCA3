@@ -9,13 +9,7 @@ class Show extends React.Component {
   // # Local state
   // #######################################################
 
-  state = {
-  Title     : '',
-  Season    : '',
-  FirstEpisodeDate : '',
-  FinalEpisodeDate : '',
-  NoOfEpisodes : ''
-}
+  state = {}
 
   // #######################################################
   // # Render
@@ -39,10 +33,10 @@ class Show extends React.Component {
       return (
         <div>
           <h1>{this.state.show.Title}</h1>
-          <h1>{this.state.show.Seasons}</h1>
-          <h1>{this.state.show.FirstEpisodeDate}</h1>
-          <h1>{this.state.show.FinalEpisodeDate}</h1>
-          <h1>{this.state.show.NoOfEpisodes}</h1>
+          <h1>Season: {this.state.show.Seasons}</h1>
+          <h1>First Episode Date: {this.state.show.FirstEpisodeDate}</h1>
+          <h1>Final Episode Date: {this.state.show.FinalEpisodeDate}</h1>
+          <h1>Episodes: {this.state.show.NoOfEpisodes}</h1>
           <Link to='/'>Back to All shows</Link>
         </div>
       )

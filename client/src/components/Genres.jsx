@@ -35,10 +35,11 @@ class Genres extends React.Component {
           <h1>All Genres in the database</h1>
           <ul>
             {this.state.genres.map(genre => (
-              <li key={`genre_${genre._id}`}><Link to={`/genre/${genre._id}`}>{genre.Title}</Link></li>
+              <li key={`genre_${genre._id}`}><Link to={`/genre/${genre._id}`}>{genre.Genre}</Link></li>
             ))}
           </ul>
-          <p><Link to='/add-genre'>Add a new Show</Link></p>
+          <p><Link to='/add-genre'>Add a new Genre</Link></p>
+          <p><Link to='../../'>Back to all Shows</Link></p>
         </div>
       )
     }

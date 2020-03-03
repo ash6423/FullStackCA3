@@ -3,13 +3,15 @@ import {Link}             from '@reach/router';
 import urlToCurrentDomain from '../lib/urlToCurrentDomain';
 import * as Config        from '../config.json'
 
-class Show extends React.Component {
+class Genre extends React.Component {
 
   // #######################################################
   // # Local state
   // #######################################################
 
-  state = {}
+  state = {
+  Genre     : ''
+}
 
   // #######################################################
   // # Render
@@ -19,25 +21,21 @@ class Show extends React.Component {
 
     if (!this.state.genre && this.state.genreLoaded === true) {
       return (
-        <p>Error loading genres. Try again later.</p>
+        <p>Error loading genre. Try again later.</p>
       );
     } else if (!this.state.genre) {
       return (
-        <p>Loading genres...</p>
+        <p>Loading genre...</p>
       );
     } else if (this.state.genre.length === 0) {
       return (
-        <p>Sorry, no genres are available</p>
+        <p>Sorry, no genre is available</p>
       );
     } else {
       return (
         <div>
-          <h1>{this.state.genre.Title}</h1>
-          <h1>{this.state.genre.Seasons}</h1>
-          <h1>{this.state.genre.FirstEpisodeDate}</h1>
-          <h1>{this.state.genre.FinalEpisodeDate}</h1>
-          <h1>{this.state.genre.noOfEpisodes}</h1>
-          <Link to='/'>Back to All genres</Link>
+          <h1>Genre: {this.state.genre.Genre}</h1>
+          <Link to='../../genres'>Back to All genres</Link>
         </div>
       )
     }

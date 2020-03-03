@@ -1,3 +1,4 @@
 {
-  "showsAPI": ":3000/shows"
+  "showsAPI": ":3000/shows",
+  "genresAPI" : ":3000/genres"
 }

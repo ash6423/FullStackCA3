@@ -11,7 +11,7 @@ class AddShow extends React.Component {
 
   state = {
     Title     : '',
-    Season    : '',
+    Seasons    : '',
     FirstEpisodeDate : '',
     FinalEpisodeDate : '',
     NoOfEpisodes : ''
@@ -48,15 +48,15 @@ class AddShow extends React.Component {
               </label>
 
               <label>Number of Seasons:
-                <input type='text' value={this.state.Season} onChange={this.handleSeasonUpdate.bind(this)} />
+                <input type='text' value={this.state.Seasons} onChange={this.handleSeasonsUpdate.bind(this)} />
               </label>
 
               <label>Show air date:
-                <input type='text' value={this.state.Air} onChange={this.handleAirUpdate.bind(this)} />
+                <input type='text' value={this.state.FirstEpisodeDate} onChange={this.handleFirstEpisodeDateUpdate.bind(this)} />
               </label>
   
               <label>Air date of the final episode:
-                <input type='text' value={this.state.Finalair} onChange={this.handleFinalAirUpdate.bind(this)} />
+                <input type='text' value={this.state.FinalEpisodeDate} onChange={this.handleFinalEpisodeDateUpdate.bind(this)} />
               </label>
 
               <label>No of Episodes:
@@ -85,16 +85,16 @@ class AddShow extends React.Component {
     this.setState({Title: e.target.value || null});
   }
 
-  handleSeasonUpdate(e) {
-    this.setState({Season: e.target.value || null});
+  handleSeasonsUpdate(e) {
+    this.setState({Seasons: e.target.value || null});
   }
 
-  handleAirUpdate(e) {
-    this.setState({Air: e.target.value || null});
+  handleFirstEpisodeDateUpdate(e) {
+    this.setState({FirstEpisodeDate: e.target.value || null});
   }
 
-  handleFinalAirUpdate(e) {
-    this.setState({Finalair: e.target.value || null});
+  handleFinalEpisodeDateUpdate(e) {
+    this.setState({FinalEpisodeDate: e.target.value || null});
   }
 
   handleNoOfEpisodesUpdate(e) {
@@ -113,7 +113,6 @@ class AddShow extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-       
         Title     : this.state.Title,
         Seasons : this.state.Seasons,
         FirstEpisodeDate : this.state.FirstEpisodeDate,

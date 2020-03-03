@@ -1,7 +1,7 @@
 const express  = require('express');
 const router   = express.Router();
 const mongoose = require('mongoose'); // using to generate ObjectIDs
-const Show  = require('../models/Show').Cake;
+const Show  = require('../models/Show').Show;
 
 /**
  * Functionality for this route:
@@ -39,11 +39,12 @@ router.get('/:id([0-9a-fA-F]{24})', (req, res) => {
 // POST Create a new show
 router.post('/', (req, res) => {
   return new Show({
-    Title     : this.state.Title,
-        Seasons : this.state.Seasons,
-        FirstEpisodeDate : this.state.FirstEpisodeDate,
-        FinalEpisodeDate : this.state.FinalEpisodeDate,
-        NoOfEpisodes : this.state.NoOfEpisodes
+    Title     : req.body.Title,
+    Seasons     : req.body.Seasons,
+    FirstEpisodeDate     : req.body.FirstEpisodeDate,
+    FinalEpisodeDate     : req.body.FinalEpisodeDate,
+    NoOfEpisodes     : req.body.NoOfEpisodes,
+
   })
   .save()
   .then (show => Show.populate(show, {path: '_id'}))
@@ -71,11 +72,11 @@ router.put('/:id([0-9a-fA-F]{24})', (req, res) => {
     .findOneAndUpdate(
       {_id: req.params.id},
       {$set: {
-        Title     : this.state.Title,
-        Seasons : this.state.Seasons,
-        FirstEpisodeDate : this.state.FirstEpisodeDate,
-        FinalEpisodeDate : this.state.FinalEpisodeDate,
-        NoOfEpisodes : this.state.NoOfEpisodes
+        Title     : req.body.Title,
+        Seasons : req.body.Seasons,
+        FirstEpisodeDate : req.body.FirstEpisodeDate,
+        FinalEpisodeDate : req.body.FinalEpisodeDate,
+        NoOfEpisodes : req.body.NoOfEpisodes
       }},
       {new: true}
     )
