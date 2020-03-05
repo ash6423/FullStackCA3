@@ -1,4 +1,8 @@
 .bg-dark {
-  background-color: brown;
+  background-color: purple;
+}
+
+body {
+  background-color: coral !important;
 }
 /*# sourceMappingURL=main.css.map */

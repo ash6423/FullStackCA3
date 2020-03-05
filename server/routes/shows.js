@@ -44,6 +44,7 @@ router.post('/', (req, res) => {
     FirstEpisodeDate     : req.body.FirstEpisodeDate,
     FinalEpisodeDate     : req.body.FinalEpisodeDate,
     NoOfEpisodes     : req.body.NoOfEpisodes,
+    Image   :    req.body.Image,
 
   })
   .save()
@@ -76,7 +77,8 @@ router.put('/:id([0-9a-fA-F]{24})', (req, res) => {
         Seasons : req.body.Seasons,
         FirstEpisodeDate : req.body.FirstEpisodeDate,
         FinalEpisodeDate : req.body.FinalEpisodeDate,
-        NoOfEpisodes : req.body.NoOfEpisodes
+        NoOfEpisodes : req.body.NoOfEpisodes,
+        Image :  req.body.Image
       }},
       {new: true}
     )

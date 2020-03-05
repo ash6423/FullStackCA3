@@ -1,7 +1,7 @@
-import React              from 'react';
-import {navigate, Link}   from '@reach/router';
+import React from 'react';
+import { navigate, Link } from '@reach/router';
 import urlToCurrentDomain from '../lib/urlToCurrentDomain';
-import * as Config        from '../config.json'
+import * as Config from '../config.json'
 
 class AddShow extends React.Component {
 
@@ -10,11 +10,12 @@ class AddShow extends React.Component {
   // #######################################################
 
   state = {
-    Title     : '',
-    Seasons    : '',
-    FirstEpisodeDate : '',
-    FinalEpisodeDate : '',
-    NoOfEpisodes : ''
+    Image: '',
+    Title: '',
+    Seasons: '',
+    FirstEpisodeDate: '',
+    FinalEpisodeDate: '',
+    NoOfEpisodes: ''
   }
 
   // #######################################################
@@ -43,6 +44,10 @@ class AddShow extends React.Component {
           <form onSubmit={this.handleSubmit.bind(this)}>
 
             <div>
+              <label>Show Image link:
+                <input type='text' value={this.state.Image} onChange={this.handleImageUpdate.bind(this)} />
+              </label>
+
               <label>Show Title:
                 <input type='text' value={this.state.Title} onChange={this.handleTitleUpdate.bind(this)} />
               </label>
@@ -54,7 +59,7 @@ class AddShow extends React.Component {
               <label>Show air date:
                 <input type='text' value={this.state.FirstEpisodeDate} onChange={this.handleFirstEpisodeDateUpdate.bind(this)} />
               </label>
-  
+
               <label>Air date of the final episode:
                 <input type='text' value={this.state.FinalEpisodeDate} onChange={this.handleFinalEpisodeDateUpdate.bind(this)} />
               </label>
@@ -81,24 +86,28 @@ class AddShow extends React.Component {
     }
   }
 
+  handleImageUpdate(e) {
+    this.setState({ Image: e.target.value || null });
+  }
+
   handleTitleUpdate(e) {
-    this.setState({Title: e.target.value || null});
+    this.setState({ Title: e.target.value || null });
   }
 
   handleSeasonsUpdate(e) {
-    this.setState({Seasons: e.target.value || null});
+    this.setState({ Seasons: e.target.value || null });
   }
 
   handleFirstEpisodeDateUpdate(e) {
-    this.setState({FirstEpisodeDate: e.target.value || null});
+    this.setState({ FirstEpisodeDate: e.target.value || null });
   }
 
   handleFinalEpisodeDateUpdate(e) {
-    this.setState({FinalEpisodeDate: e.target.value || null});
+    this.setState({ FinalEpisodeDate: e.target.value || null });
   }
 
   handleNoOfEpisodesUpdate(e) {
-    this.setState({NoOfEpisodes: e.target.value || null});
+    this.setState({ NoOfEpisodes: e.target.value || null });
   }
 
   handleSubmit(e) {
@@ -108,33 +117,36 @@ class AddShow extends React.Component {
 
     // Perform a POST call for the new data
     fetch(urlToCurrentDomain(`${Config.showsAPI}`), {
-      method : 'POST',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        Title     : this.state.Title,
-        Seasons : this.state.Seasons,
-        FirstEpisodeDate : this.state.FirstEpisodeDate,
-        FinalEpisodeDate : this.state.FinalEpisodeDate,
-        NoOfEpisodes : this.state.NoOfEpisodes
-      })}
+        Image: this.state.Image,
+        Title: this.state.Title,
+        Seasons: this.state.Seasons,
+        FirstEpisodeDate: this.state.FirstEpisodeDate,
+        FinalEpisodeDate: this.state.FinalEpisodeDate,
+        NoOfEpisodes: this.state.NoOfEpisodes
+      })
+    }
     )
-      .then (res  => {
+
+      .then(res => {
         if (res.status >= 400) {
           throw new Error(res.statusText);
         }
         return res.json();
       })
-      .then (json => navigate(`/show/${json._id}`))
+      .then(json => navigate(`/show/${json._id}`))
       .catch(err => {
-        this.setState({reportedError: err.message || 'Unknown'});
+        this.setState({ reportedError: err.message || 'Unknown' });
       })
 
   }
 
   resetForRetry() {
-    this.setState({reportedError: null});
+    this.setState({ reportedError: null });
   }
 
   componentDidMount() {

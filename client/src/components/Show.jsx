@@ -1,7 +1,8 @@
-import React              from 'react';
-import {Link}             from '@reach/router';
+import React from 'react';
+import { Link } from '@reach/router';
 import urlToCurrentDomain from '../lib/urlToCurrentDomain';
-import * as Config        from '../config.json'
+import * as Config from '../config.json'
+
 
 class Show extends React.Component {
 
@@ -32,6 +33,7 @@ class Show extends React.Component {
     } else {
       return (
         <div>
+          <img src={this.state.show.Image} alt="showImage" />
           <h1>{this.state.show.Title}</h1>
           <h1>Season: {this.state.show.Seasons}</h1>
           <h1>First Episode Date: {this.state.show.FirstEpisodeDate}</h1>
@@ -45,13 +47,13 @@ class Show extends React.Component {
 
   componentDidMount() {
     fetch(urlToCurrentDomain(`${Config.showsAPI}/${this.props.showID}`))
-      .then (res  => res.json())
-      .then (json => {
-        this.setState({show       : json});
-        this.setState({showLoaded : true});
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ show: json });
+        this.setState({ showLoaded: true });
       })
       .catch(err => {
-        this.setState({showLoaded: true});
+        this.setState({ showLoaded: true });
       });
   }
 

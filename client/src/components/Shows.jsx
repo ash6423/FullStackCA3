@@ -1,8 +1,8 @@
-import React              from 'react';
+import React from 'react';
 import urlToCurrentDomain from '../lib/urlToCurrentDomain';
-import {Link}             from '@reach/router';
-import * as Config        from '../config.json'
-
+import { Link } from '@reach/router';
+import * as Config from '../config.json';
+import { Card, Button } from 'react-bootstrap';
 class Shows extends React.Component {
 
   // #######################################################
@@ -32,14 +32,24 @@ class Shows extends React.Component {
     } else {
       return (
         <div>
-          <h1>All Shows in the database</h1>
-          <ul>
-            {this.state.shows.map(show => (
-              <li key={`show_${show._id}`}><Link to={`/show/${show._id}`}>{show.Title}</Link></li>
-            ))}
-          </ul>
-          <p><Link to='/add-show'>Add a new Show</Link></p>
-          <p><Link to='/genres'>View all Genres</Link></p>
+          <div class="container-fluid">
+            <ul>
+              {this.state.shows.map(show => (
+                <Card key={`show_${show._id}`} style={{ width: '18rem' }}>
+                  <Card.Img id="showImage" src={show.Image} alt="showImage" />
+                  <Card.Body>
+                    <Card.Text to={`/show/${show._id}`} >
+                      Number of Episodes: {show.NoOfEpisodes}
+                    </Card.Text>
+                    <Link to={`/show/${show._id}`} variant="primary">{show.Title}</Link>
+                  </Card.Body>
+                </Card>
+              ))}
+            </ul>
+            <p><Link to="/add-show"> Add a new Show</Link></p>
+
+            <p><Link to="/genres"> View All Genres</Link></p>
+          </div>
         </div>
       )
     }
@@ -47,13 +57,13 @@ class Shows extends React.Component {
 
   componentDidMount() {
     fetch(urlToCurrentDomain(Config.showsAPI))
-      .then (res  => res.json())
-      .then (json => {
-        this.setState({shows       : json});
-        this.setState({showsLoaded : true});
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ shows: json });
+        this.setState({ showsLoaded: true });
       })
       .catch(err => {
-        this.setState({showsLoaded: true});
+        this.setState({ showsLoaded: true });
       });
   }
 
